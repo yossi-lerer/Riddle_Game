@@ -20,6 +20,7 @@ class RiddleGame:
             self.__results.append(QuestionResult(riddle.riddle_id, riddle.get_type, riddle.category, total_time))
 
         print(self.__results[0].__dict__)
+        return GameResult(self.__player.get_username(), self.__results)
 
 class Player:
     def __init__(self, username):
@@ -38,21 +39,45 @@ class QuestionResult:
         self.__category = category
         self.__time_taken = time_taken
 
+    @property
+    def riddle_type(self):
+        return self.__riddle_type
+    @property
+    def category(self):
+        return self.__category
+    @property
+    def time_taken(self):
+        return self.__time_taken
+    
+
 class GameResult:
     def __init__(self, user, question_results):
-        self.__username = user.get_username()
-        self.__date = 0
+        self.__username = user
+        self.__date = time.strftime("%Y-%m-%d")
         self.__total_time = 0
         self.__question_results = question_results
-    
+
+
     def get_total_riddles(self) -> int:
-        pass
+        return len(self.__question_results)
     
     def average_time_by_type(self) -> dict[str, float]:
-        pass
+        average = {}
+        for question in self.__question_results:
+            if question.riddle_type in average:
+                average[question.riddle_type] += question.time_taken
+            else:
+                average[question.riddle_type] = question.time_taken
+        return average
 
     def average_time_by_category(self) -> dict[str, float]:
-        pass
-
+        average = {}
+        for question in self.__question_results:
+            if question.category in average:
+                average[question.category] += question.time_taken
+            else:
+                average[question.category] = question.time_taken
+        return average
+    
     def to_csv_row(self) -> list:
         pass

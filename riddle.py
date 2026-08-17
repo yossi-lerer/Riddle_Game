@@ -42,8 +42,8 @@ class MultipleChoiceRiddle(Riddle):
     
     def display(self) -> None:
         print(self.question)
-        print(self.__possible_answers)
-
+        for answer in self.__possible_answers:
+            print(f"option: {answer}")
     def check_answer(self, answer: str) -> bool:
         if answer == self.correct_answer:
             return True
