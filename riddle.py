@@ -1,6 +1,6 @@
 class Riddle:
-    def __init__(self, id, question, correct_answer, difficulty, category):
-        self.__id = id
+    def __init__(self, riddle_id, question, correct_answer, difficulty, category):
+        self.__id = riddle_id
         self.__question = question
         self.__correct_answer = correct_answer
         self.__difficulty = difficulty
@@ -18,6 +18,7 @@ class Riddle:
     def to_dict(self) -> dict:
         pass
 
+    # getter
     @property
     def question(self):
         return self.__question
@@ -25,6 +26,14 @@ class Riddle:
     @property
     def correct_answer(self):
         return self.__correct_answer
+
+    @property
+    def riddle_id(self):
+        return self.__id
+
+    @property
+    def category(self):
+        return self.__category
 
 class MultipleChoiceRiddle(Riddle):
     def __init__(self, id, question, correct_answer, difficulty, category, possible_answers):
@@ -43,5 +52,19 @@ class MultipleChoiceRiddle(Riddle):
         return list(self.__possible_answers)
 
 class FourAnswerRiddle(MultipleChoiceRiddle):
+    @property
     def get_type(self) -> str:
-        return  "multiple 4"
+        return  "multiple_4"
+
+class TwoAnswerRiddle(MultipleChoiceRiddle):
+    @property    
+    def get_type(self) -> str:
+        return  "multiple_2"
+
+class OpenRiddle(Riddle):
+    def display(self) -> None:
+        print(self.question)
+   
+    @property
+    def get_type(self) -> str:
+        return  "open"

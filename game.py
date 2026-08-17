@@ -1,0 +1,58 @@
+import time
+
+class RiddleGame:
+    def __init__(self, Player, Riddle):
+        self.__player =  Player
+        self.__riddles = Riddle
+        self.__results = []
+
+    def start(self):
+        start = time.time()
+        print(self.__player.get_username())
+        for riddle in self.__riddles:
+            riddle.display()
+            while True:
+                answer = input("enter answer ")
+                if riddle.check_answer(answer):
+                    break
+            end = time.time()
+            total_time = end - start
+            self.__results.append(QuestionResult(riddle.riddle_id, riddle.get_type, riddle.category, total_time))
+
+        print(self.__results[0].__dict__)
+
+class Player:
+    def __init__(self, username):
+        self.__username = username
+
+    def get_username(self) -> str:
+        return self.__username
+
+    def rename(self, new_username: str) -> None:
+        pass
+
+class QuestionResult:
+    def __init__(self, riddle_id: int, riddle_type: str, category: str, time_taken: float):
+        self.__riddle_id = riddle_id
+        self.__riddle_type = riddle_type
+        self.__category = category
+        self.__time_taken = time_taken
+
+class GameResult:
+    def __init__(self, user, question_results):
+        self.__username = user.get_username()
+        self.__date = 0
+        self.__total_time = 0
+        self.__question_results = question_results
+    
+    def get_total_riddles(self) -> int:
+        pass
+    
+    def average_time_by_type(self) -> dict[str, float]:
+        pass
+
+    def average_time_by_category(self) -> dict[str, float]:
+        pass
+
+    def to_csv_row(self) -> list:
+        pass
