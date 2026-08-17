@@ -49,7 +49,6 @@ class QuestionResult:
     def time_taken(self):
         return self.__time_taken
     
-
 class GameResult:
     def __init__(self, user, question_results):
         self.__username = user
@@ -65,19 +64,26 @@ class GameResult:
         average = {}
         for question in self.__question_results:
             if question.riddle_type in average:
-                average[question.riddle_type] += question.time_taken
+                average[question.riddle_type][0] += question.time_taken
+                average[question.riddle_type][1] += question.time_taken
             else:
-                average[question.riddle_type] = question.time_taken
+                average[question.riddle_type] = [question.time_taken, 1]
+        for avg in average:
+            average[avg] = f"{average[avg][0] / average[avg][1]:.2f}"
         return average
 
     def average_time_by_category(self) -> dict[str, float]:
         average = {}
         for question in self.__question_results:
             if question.category in average:
-                average[question.category] += question.time_taken
+                average[question.category][0] += question.time_taken
+                average[question.category][1] += 1
             else:
-                average[question.category] = question.time_taken
+                average[question.category] = [question.time_taken, 1]
+        for avg in average:
+            average[avg] = f"{average[avg][0] / average[avg][1]:.2f}"
         return average
+    
     
     def to_csv_row(self) -> list:
         pass
