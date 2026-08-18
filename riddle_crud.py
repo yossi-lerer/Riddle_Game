@@ -10,16 +10,16 @@ class RiddleRepository:
             data = json.load(file)
         return data
 
-    def add_riddle(self) -> None:
+    def add_riddle(self, riddle_id, question, correct_answer, type, possible_answers, difficulty, category) -> None:
         riddles = self.load_riddles()
         riddles.append({
-    "id": 11,
-    "question": "Who was the first president of the United States?",
-    "correct_answer": "George Washington",
-    "type": "open",
-    "possible_answers": [],
-    "difficulty": "hard",
-    "category": "history"
+    "id": riddle_id,
+    "question": question,
+    "correct_answer": correct_answer,
+    "type": type,
+    "possible_answers": possible_answers,
+    "difficulty": difficulty,
+    "category": category
   })
         print(riddles)
         with open(self.__file_path, "w") as file:
@@ -38,5 +38,5 @@ class RiddleRepository:
         def save_riddles(self, riddles: list[Riddle]) -> None:
             pass
 ridd = RiddleRepository("answers.json")
-ridd.add_riddle()
+ridd.add_riddle(12, "Who was the first president of the United States?", "George Washington", "open", [], "hard", "history")
 # print(ridd.load_riddles())
