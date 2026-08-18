@@ -22,6 +22,12 @@ class RiddleGame:
         print(self.__results[0].__dict__)
         return GameResult(self.__player.get_username(), self.__results)
 
+    def ask_riddle(self, riddle: Riddle) -> QuestionResult:
+        pass
+
+    def print_summary(self, result: GameResult) -> None:
+        pass
+    
 class Player:
     def __init__(self, username):
         self.__username = username
@@ -65,7 +71,7 @@ class GameResult:
         for question in self.__question_results:
             if question.riddle_type in average:
                 average[question.riddle_type][0] += question.time_taken
-                average[question.riddle_type][1] += question.time_taken
+                average[question.riddle_type][1] += 1
             else:
                 average[question.riddle_type] = [question.time_taken, 1]
         for avg in average:
