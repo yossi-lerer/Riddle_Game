@@ -22,12 +22,12 @@ class RiddleGame:
         print(self.__results[0].__dict__)
         return GameResult(self.__player.get_username(), self.__results)
 
-    def ask_riddle(self, riddle: Riddle) -> QuestionResult:
-        pass
+    # def ask_riddle(self, riddle: Riddle) -> QuestionResult:
+    #     pass
 
-    def print_summary(self, result: GameResult) -> None:
-        pass
-    
+    # def print_summary(self, result: GameResult) -> None:
+    #     pass
+
 class Player:
     def __init__(self, username):
         self.__username = username
