@@ -10,9 +10,8 @@ class RiddleGame:
         start = time.time()
         print(self.__player.get_username())
         for riddle in self.__riddles:
-            riddle.display()
             while True:
-                answer = input("enter answer ")
+                answer = riddle.display()
                 if riddle.check_answer(answer):
                     break
             end = time.time()

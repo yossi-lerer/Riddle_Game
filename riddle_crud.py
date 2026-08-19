@@ -26,7 +26,16 @@ class RiddleRepository:
             json.dump(riddles, file)
     
     def get_all_riddles(self) -> list[Riddle]:
-        pass
+        riddle_list = []
+        riddles = self.load_riddles()
+        for riddle in riddles:
+            if riddle["type"] == "multiple_4":
+                riddle_list.append(FourAnswerRiddle(riddle["id"], riddle["question"], riddle["correct_answer"], riddle["difficulty"], riddle["category"],riddle["possible_answers"]))
+            elif riddle["type"] == "multiple_2":
+                riddle_list.append(TwoAnswerRiddle(riddle["id"], riddle["question"], riddle["correct_answer"], riddle["difficulty"], riddle["category"],riddle["possible_answers"]))
+            elif riddle["type"] == "open":
+                riddle_list.append(OpenRiddle(riddle["id"], riddle["question"], riddle["correct_answer"], riddle["difficulty"], riddle["category"]))
+        return riddle_list
     def get_riddle_by_id(self, riddle_id: int) -> Riddle | None:
         pass
     def update_riddle(self, riddle_id: int, new_data: dict) -> bool:
@@ -37,6 +46,6 @@ class RiddleRepository:
 
         def save_riddles(self, riddles: list[Riddle]) -> None:
             pass
-ridd = RiddleRepository("answers.json")
-ridd.add_riddle(12, "Who was the first president of the United States?", "George Washington", "open", [], "hard", "history")
+# ridd.add_riddle(12, "Who was the first president of the United States?", "George Washington", "open", [], "hard", "history")
 # print(ridd.load_riddles())
+# print(ridd.get_all_riddles())
