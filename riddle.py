@@ -58,6 +58,7 @@ class MultipleChoiceRiddle(Riddle):
         for answer in self.__possible_answers:
             choices.append(answer)
         return  questionary.select(self.question, choices).ask()
+    
     def check_answer(self, answer: str) -> bool:
         print(answer)
         if answer == self.correct_answer:

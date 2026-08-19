@@ -14,6 +14,8 @@ class RiddleGame:
                 answer = riddle.display()
                 if riddle.check_answer(answer):
                     break
+                if answer == "exit":
+                    exit()
             end = time.time()
             total_time = end - start
             self.__results.append(QuestionResult(riddle.riddle_id, riddle.get_type, riddle.category, total_time))
