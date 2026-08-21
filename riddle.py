@@ -1,7 +1,10 @@
+import questionary
+
+
 class Riddle:
     def __init__(self, riddle_id, question, correct_answer, difficulty, category):
-        difficul = ["Easy", "Medium", "Hard"]
-        category_possible  = ["Math", "English", "Geography", "Science", "History"]
+        difficul = ["easy", "medium", "hard"]
+        category_possible  = ["math", "english", "geography", "science", "history"]
         if type(riddle_id) == int and type(question) == str and type(correct_answer) == str and difficulty in difficul and category in category_possible:
             self.__id = riddle_id
             self.__question = question
@@ -48,12 +51,16 @@ class MultipleChoiceRiddle(Riddle):
         else:
             print("we have a problem")
             exit()
-            
+
     def display(self) -> None:
         print(self.question)
+        choices = []
         for answer in self.__possible_answers:
-            print(f"option: {answer}")
+            choices.append(answer)
+        return  questionary.select(self.question, choices).ask()
+    
     def check_answer(self, answer: str) -> bool:
+        print(answer)
         if answer == self.correct_answer:
             return True
         
@@ -72,8 +79,8 @@ class TwoAnswerRiddle(MultipleChoiceRiddle):
 
 class OpenRiddle(Riddle):
     def display(self) -> None:
-        print(self.question)
-   
+        question = questionary.text(self.question).ask()
+        return question
     def check_answer(self, answer: str) -> bool:
         if answer == self.correct_answer:
             return True
