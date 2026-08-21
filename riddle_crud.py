@@ -23,7 +23,6 @@ class RiddleRepository:
     "difficulty": difficulty,
     "category": category
   })
-        print(riddles)
         with open(self.__file_path, "w") as file:
             json.dump(riddles, file)
     
